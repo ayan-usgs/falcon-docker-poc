@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER Andrew Yan "ayan@usgs.gov"
 ARG pypi_repo
+ARG pypi_host
 RUN apt update -y
 RUN apt install -y python3-pip python3-dev build-essential
 RUN mkdir /local
@@ -12,7 +13,7 @@ COPY gunicorn_config.py /local/gunicorn_config.py
 COPY pip.conf /etc/pip.conf
 RUN export PIP_CERT="/etc/ssl/certs/ca-certificates.crt" && \
     pip3 install --upgrade pip && \
-    pip3 install falcon-hello-world -i https://pypi.python.org/simple --extra-index-url ${pypi_repo} -v
+    pip3 install falcon-hello-world -i https://pypi.python.org/simple --extra-index-url ${pypi_repo} --trusted-host ${pypi_host} -v
 ENV bind_ip 0.0.0.0
 ENV bind_port 7010
 EXPOSE ${bind_port}
