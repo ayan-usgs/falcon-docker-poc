@@ -4,8 +4,6 @@ ARG pypi_repo
 ARG pypi_host
 RUN apt update -y
 RUN apt install -y python3-pip python3-dev build-essential
-RUN mkdir /local
-RUN openssl x509 -in /tmp/DOIRootCA.crt -out /local/DOIRootCA.pem -outform PEM
 RUN update-ca-certificates
 COPY gunicorn_config.py /local/gunicorn_config.py
 COPY pip.conf /etc/pip.conf
