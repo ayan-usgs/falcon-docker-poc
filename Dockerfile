@@ -19,5 +19,6 @@ ENV bind_ip 0.0.0.0
 ENV bind_port ${listening_port}
 ENV ssl_keyfile ${ssl_keyfile}
 ENV ssl_certfile ${ssl_certfile}
+ENV log_level INFO
 EXPOSE ${bind_port}
 CMD ["/usr/bin/gunicorn", "--reload",  "greetings.app", "--config", "file:/local/gunicorn_config.py"]
