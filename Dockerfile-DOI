@@ -4,13 +4,13 @@ ARG artifact_version
 ARG ssl_keyfile
 ARG ssl_certfile
 ARG listening_port=7010
+RUN apk update && apk upgrade && mkdir /local
 RUN apk add --update \
   python3 \
   python3-dev \
   build-base \
   ca-certificates \
   openssl
-RUN mkdir /local
 COPY root.crt /tmp/DOIRootCA.crt
 RUN openssl x509 -in /tmp/DOIRootCA.crt -out /local/DOIRootCA.pem -outform PEM
 RUN mv /tmp/DOIRootCA.crt /usr/local/share/ca-certificates/DOIRootCA.crt

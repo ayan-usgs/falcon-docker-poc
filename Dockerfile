@@ -4,6 +4,7 @@ ARG artifact_version
 ARG ssl_keyfile
 ARG ssl_certfile
 ARG listening_port=7010
+RUN apk update && apk upgrade && mkdir /local
 RUN apk add --update \
   python3 \
   python3-dev \
